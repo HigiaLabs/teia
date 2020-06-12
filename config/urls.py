@@ -27,4 +27,7 @@ router.register(r'imagens', ImagensViewSet, basename='imagens')
 urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('admin/', admin.site.urls),
+
+    path('', include('django.contrib.auth.urls')),
+    path('', include(('apps.imagens.urls', 'images'), namespace='images')),
 ]
