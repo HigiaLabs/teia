@@ -10,7 +10,7 @@ from django.views.decorators import gzip
 class VideoCamera(object):
     def __init__(self):
         # URL = 'apps/utils/video/WIN_20200611_22_01_47_Pro.mp4'
-        URL = 'apps/utils/video/ezgif.com-gif-makerx4.mp4'
+        URL = 'apps/utils/video/ezgif.com-gif-makerx8.mp4'
         # self.video = cv2.VideoCapture(0)
         self.video = cv2.VideoCapture(URL)
     def __del__(self):
