@@ -9,7 +9,10 @@ from django.views.decorators import gzip
 
 class VideoCamera(object):
     def __init__(self):
-        self.video = cv2.VideoCapture(0)
+        # URL = 'apps/utils/video/WIN_20200611_22_01_47_Pro.mp4'
+        URL = 'apps/utils/video/ezgif.com-gif-makerx4.mp4'
+        # self.video = cv2.VideoCapture(0)
+        self.video = cv2.VideoCapture(URL)
     def __del__(self):
         self.video.release()
 
@@ -19,7 +22,6 @@ class VideoCamera(object):
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         face_cascade = cv2.CascadeClassifier(HAARCASCADE_FACE)
         faces = face_cascade.detectMultiScale(gray, 1.1, 0)
-        faces_detectadas = list()
         for (x, y, w, h) in faces:
             # To draw a rectangle in a face
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 255, 0), 2)
