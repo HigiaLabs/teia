@@ -32,6 +32,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+REDIS_URL =  config('REDIS_URL')
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -121,10 +123,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "BACKEND": "asgi_redis.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("localhost", 6379)],
+            "hosts": [os.environ.get('REDIS_URL', REDIS_URL)],
         },
+        "ROUTING": "chat.routing.channel_routing",
     },
 }
 
@@ -151,3 +154,5 @@ STATIC_URL = '/apps/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+
