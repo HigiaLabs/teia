@@ -1,8 +1,8 @@
 import cv2
 from django.http import HttpResponseServerError, StreamingHttpResponse
-from django.shortcuts import render
 from django.views.decorators import gzip
-from numba import jit, int32
+
+
 # Create your views here.
 
 
@@ -11,17 +11,18 @@ class VideoCamera(object):
     def __init__(self):
         # URL = 'apps/utils/video/WIN_20200611_22_01_47_Pro.mp4'
         URL = 'apps/utils/video/ezgif.com-gif-makerx8.mp4'
-        # self.video = cv2.VideoCapture(0)
         self.video = cv2.VideoCapture(URL)
+        # self.video = cv2.VideoCapture(0)
+
     def __del__(self):
         self.video.release()
 
     def get_frame(self):
-        HAARCASCADE_FACE = 'apps/utils/haarcascade/haarcascade_frontalcatface.xml'
+        # HAARCASCADE_FACE = 'apps/utils/haarcascade/haarcascade_frontalcatface.xml'
         ret,image = self.video.read()
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        face_cascade = cv2.CascadeClassifier(HAARCASCADE_FACE)
-        faces = face_cascade.detectMultiScale(gray, 1.1, 0)
+        face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+        faces = face_cascade.detectMultiScale(gray, 1.1, 5)
         for (x, y, w, h) in faces:
             # To draw a rectangle in a face
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 255, 0), 2)

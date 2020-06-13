@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     #aplicacoes terceiras
     'rest_framework',
+    'channels',
 
 
     #aplicacoes django
@@ -84,7 +85,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+# WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = "config.routing.application"
 
 
@@ -122,12 +123,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', REDIS_URL)],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": REDIS_URL,
         },
-        "ROUTING": "chat.routing.channel_routing",
     },
 }
 
