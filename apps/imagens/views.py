@@ -2,7 +2,7 @@ import cv2
 from django.http import HttpResponseServerError, StreamingHttpResponse
 from django.shortcuts import render
 from django.views.decorators import gzip
-
+from numba import jit, int32
 # Create your views here.
 
 
@@ -34,6 +34,7 @@ def gen(camera):
         frame = camera.get_frame()
         yield(b'--frame\r\n'
         b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
 
 @gzip.gzip_page
 def index(request):
