@@ -9,6 +9,7 @@ h11==0.9.0
 numpy==1.18.5
 opencv-contrib-python==4.2.0.34
 opencv-python==4.2.0.34
+opencv-python-headless==4.2.0.34
 Pillow==7.1.2
 prettyconf==2.1.0
 psycopg2==2.8.5
