@@ -1,7 +1,7 @@
 import cv2
 from django.http import HttpResponseServerError, StreamingHttpResponse
 from django.views.decorators import gzip
-import acapture
+
 
 
 # Create your views here.
@@ -23,7 +23,7 @@ class VideoCamera(object):
     def get_frame(self):
         # HAARCASCADE_FACE = 'apps/utils/haarcascade/haarcascade_frontalcatface.xml'
         ret,image = self.video.read()
-        image = cv2.resize(image, None, fx=0.3, fy=0.3)
+        image = cv2.resize(image, None, fx=0.2, fy=0.2)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
         faces = face_cascade.detectMultiScale(gray, 1.1, 5)
