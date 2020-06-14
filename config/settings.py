@@ -36,12 +36,16 @@ REDIS_URL =  config('REDIS_URL')
 
 # Application definition
 
+# Autenticacao do usuário
+AUTH_USER_MODEL = "usuarios.Usuarios"
+
 INSTALLED_APPS = [
    #aplicacoes desenvolvidas
     'apps.cameras',
     'apps.imagens',
     'apps.message',
     'apps.room',
+    'apps.usuarios',
 
     #aplicacoes terceiras
     'rest_framework',
