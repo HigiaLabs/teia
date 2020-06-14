@@ -32,14 +32,19 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+REDIS_URL =  config('REDIS_URL')
+
 # Application definition
 
 INSTALLED_APPS = [
    #aplicacoes desenvolvidas
     'apps.imagens',
+    'apps.message',
+    'apps.room',
 
     #aplicacoes terceiras
     'rest_framework',
+    'channels',
 
 
     #aplicacoes django
@@ -80,7 +85,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+# WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = "config.routing.application"
 
 
 # Database
@@ -116,6 +122,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": REDIS_URL,
+        },
+    },
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -138,3 +154,5 @@ STATIC_URL = '/apps/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+
