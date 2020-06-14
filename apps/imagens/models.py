@@ -1,10 +1,13 @@
 from django.db import models
 
 # Criar o modelo aqui
+from apps.cameras.models import Cameras
+
 
 class Imagens(models.Model):
     imagem =  models.TextField()
     data = models.DateTimeField(auto_created=True, blank=True,null=True)
+    camera = models.ForeignKey(Cameras, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return '__all__'

@@ -38,6 +38,7 @@ REDIS_URL =  config('REDIS_URL')
 
 INSTALLED_APPS = [
    #aplicacoes desenvolvidas
+    'apps.cameras',
     'apps.imagens',
     'apps.message',
     'apps.room',
