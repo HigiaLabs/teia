@@ -39,13 +39,7 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-
-
     return AssertionError(HttpResponseServerError('Não foi possivel conectar a camera infomada.'))
-
-
-
-
 
 
 @gzip.gzip_page

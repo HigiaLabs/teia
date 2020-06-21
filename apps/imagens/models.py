@@ -6,7 +6,7 @@ from apps.cameras.models import Cameras
 
 class Imagens(models.Model):
     imagem =  models.TextField()
-    data = models.DateTimeField(auto_created=True, blank=True,null=True)
+    data = models.DateTimeField(auto_now_add=True, blank=True,null=True)
     camera = models.ForeignKey(Cameras, on_delete=models.DO_NOTHING)
 
     def __str__(self):

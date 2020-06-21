@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from apps.imagens.models import Imagens
+from ..models import Cameras
 
 
-class ImagensSerializer(serializers.ModelSerializer):
+class CamerasSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Imagens
+        model = Cameras
         fields = '__all__'
