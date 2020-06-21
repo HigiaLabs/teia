@@ -15,6 +15,16 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import dj_database_url
 from prettyconf import Configuration
+import os
+
+import dj_database_url
+from prettyconf import Configuration
+from unipath import Path
+from .celery import app
+from kombu import Exchange, Queue
+
+
+
 config = Configuration()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,16 +46,20 @@ REDIS_URL =  config('REDIS_URL')
 
 # Application definition
 
+# Autenticacao do usuário
+AUTH_USER_MODEL = "usuarios.Usuarios"
+
 INSTALLED_APPS = [
    #aplicacoes desenvolvidas
+    'apps.cameras',
     'apps.imagens',
-    'apps.message',
-    'apps.room',
+    'apps.usuarios',
 
     #aplicacoes terceiras
-    'rest_framework',
     'channels',
-
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 
     #aplicacoes django
     'django.contrib.admin',
@@ -121,6 +135,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
 
 CHANNEL_LAYERS = {
     'default': {
@@ -153,6 +173,17 @@ STATIC_URL = '/apps/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100040
 
+task_default_queue = 'default'
+defaul_exchange = Exchange('media', type='direct')
+task_queue = (
+    Queue(
+        'media_queue',
+        exchange=defaul_exchange,
+        routing_key='video'
+    )
+)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 

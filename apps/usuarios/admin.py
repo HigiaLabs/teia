@@ -1,6 +1,5 @@
 from django.contrib import admin
-
+from .models import Usuarios
 # Register your models here.
-from .models import Imagens
 
-admin.site.register(Imagens)
+admin.site.register(Usuarios)
