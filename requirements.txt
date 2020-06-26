@@ -21,6 +21,7 @@ Django==3.0.7
 django-templated-mail==1.1.1
 djangorestframework==3.11.0
 djoser==2.0.3
+dlib==19.20.0
 future==0.18.2
 gunicorn==20.0.4
 h11==0.9.0
@@ -47,6 +48,8 @@ pyasn1-modules==0.2.8
 pycparser==2.20
 PyHamcrest==2.0.2
 pyOpenSSL==19.1.0
+pytesseract==0.3.4
+python-dotenv==0.13.0
 pytz==2020.1
 redis==3.5.3
 service-identity==18.1.0
