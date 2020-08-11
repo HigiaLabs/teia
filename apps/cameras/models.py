@@ -10,10 +10,10 @@ class Cameras(models.Model):
 
 
     def __str__(self):
-        return '__all__'
+        return f'{self.host}'
 
     def __repr__(self):
-        return '__all__'
+        return f'{self.host}'
 
     class Meta():
         verbose_name = 'Camera'
